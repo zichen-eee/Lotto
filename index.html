@@ -72,7 +72,6 @@
       const clearRequest = store.clear();
 
       clearRequest.onsuccess = function () {
-        alert("已清空 IndexedDB 的 images 資料");
         document.getElementById("goNext").onclick = function () {
         if (imgLists.length === 0 || imgLists.length != selectLists.length) {
           alert('請選擇足夠的角色圖片！'+ imgLists.length +'圖片/'+ selectLists.length + ' 選項');
