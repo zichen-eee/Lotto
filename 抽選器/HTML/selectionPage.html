@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>抽獎頁</title>
+  <link rel="stylesheet" href="./CSS/selectionStyles.css" />
+</head>
+<body>
+
+  <h2>你的抽獎選項</h2>
+  <div class="main-layout">
+  <div class="button-container" id="optionList"></div>
+
+  <div class="showImage-layout">
+  <button class="start-button" onclick="startDraw()">開始抽選</button>
+  <button class="start-button" onclick="stopDraw()">停止</button>
+  <div id="resultArea"></div>
+  </div>
+</div>
+
+
+  <script>
+    const optionList = document.getElementById("optionList");
+    const stored = localStorage.getItem("selectLists");
+    var selectGroup = "";
+    let lastShownImage = null;  //已抽選過的圖片
+
+    if (stored) {
+      const options = JSON.parse(stored);
+      options.forEach(name => {
+        const btn = document.createElement("button");
+        btn.className = "option-button";
+        btn.textContent = name;
+        btn.onclick = function () {
+          if (lastShownImage) {
+          imageList = imageList.filter(img => img !== lastShownImage);
+          lastShownImage = null;
+          document.getElementById("resultArea").innerHTML = ""; // 清除顯示區域
+        }
+
+        btn.onclick = null; // 禁用按鈕點擊事件，防止重複點擊
+
+        if (imageList.length === 1) {
+            showImage(imageList[0]);
+        }
+
+        selectGroup = name;
+          btn.style.opacity = "0.5"; // 點擊後變半透明
+        };
+        optionList.appendChild(btn);
+      });
+    } else {
+      optionList.innerHTML = "<p>⚠️ 沒有收到選項，請從設定頁進入</p>";
+    }
+
+    let db;
+    let imageList = [];
+
+    let drawInterval;
+    let currentIndex = 0;
+
+    const request = indexedDB.open("ImageDB", 1);
+
+    request.onsuccess = function (event) {
+      db = event.target.result;
+      loadImages();
+    };
+
+    request.onerror = function (event) {
+      console.error("IndexedDB 錯誤：", event);
+    };
+
+    function loadImages() {
+      const tx = db.transaction("images", "readonly");
+      const store = tx.objectStore("images");
+      const getAllRequest = store.getAll();
+
+      getAllRequest.onsuccess = function () {
+        imageList = getAllRequest.result;
+        console.log("圖片載入完成：", imageList.length);
+      };
+    }
+
+    function startDraw() {
+      if (imageList.length === 0) return alert("目前沒有圖片可以抽選");
+      if (selectGroup === "") return alert("請先選擇一個組別");
+      clearInterval(drawInterval);
+      drawInterval = setInterval(() => {
+        currentIndex = Math.floor(Math.random() * imageList.length);
+        showImage(imageList[currentIndex]);
+      }, 150);
+    }
+
+    function stopDraw() {
+      clearInterval(drawInterval);
+      if (imageList.length > 0) showImage(imageList[currentIndex]);
+      selectGroup = ""; // 清除選擇的組別
+    }
+
+    function showImage(base64) {
+      const resultArea = document.getElementById("resultArea");
+      resultArea.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = base64;
+      img.style.maxWidth = "100%";
+      img.style.maxHeight = "100%";
+      resultArea.appendChild(img);
+      lastShownImage = base64;
+    }
+  </script>
+
+</body>
+</html>

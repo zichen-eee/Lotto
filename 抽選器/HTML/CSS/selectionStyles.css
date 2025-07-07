@@ -1,0 +1,67 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    padding: 40px;
+    background-color: #f0f4f8;
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .main-layout {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  }
+
+  .option-button {
+    background: #9E7A7A;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 160px;
+  }
+
+  .start-button {
+    background-color: #00c853;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .option-button:hover {
+    transform: scale(1.05);
+  }
+
+  /* #resultArea img {
+    width: 480px;
+    height: 320px;
+    margin: 10px;
+    border: 4px solid #888;
+    border-radius: 12px;
+  } */
+
+  #resultArea {
+    width: 480px;           /* 固定寬度 */
+    height: 320px;          /* 固定高度 */
+    border: 2px dashed #999; /* 顯示虛線框，可改成 solid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9; /* 淡色背景可讓邊框更明顯 */
+    margin-top: 10px;
+  }

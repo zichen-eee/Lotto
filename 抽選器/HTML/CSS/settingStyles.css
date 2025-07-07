@@ -1,0 +1,138 @@
+body {
+    background: #f0f4f8;
+    font-family: "Segoe UI", sans-serif;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    user-select: none; /* 拖動時避免選字 */
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button-row {
+    display: flex;
+    gap: 10px;
+    /*align-items: center;*/
+    /*background: .clear;*/
+    padding: 8px 12px;
+    /*border-radius: 10px;*/
+    /*box-shadow: 0 2px 6px rgba(0,0,0,0.1);*/
+    /*cursor: grab;*/
+  }
+  .button-row.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+  }
+
+  .fancy-button {
+    background: #9E7A7A;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 140px;
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .finish-button, .selectImg, .goSelect-button {
+    background: #9E7A7A;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 50px;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .fancy-button:hover {
+    transform: scale(1.05);
+  }
+
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .input-group, .reset-group {
+    margin-bottom: 16px;
+  }
+
+  .name-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 200px;
+  }
+
+  .add-button{
+    background-color: #00c853;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .reset-button {
+    background-color: #00c853;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 50px;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .upload-section {
+margin-top: 30px;
+}
+
+.preview-container {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+margin-top: 15px;
+}
+
+.preview-container img {
+max-width: 120px;
+max-height: 120px;
+object-fit: cover;
+border: 1px solid #ccc;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
